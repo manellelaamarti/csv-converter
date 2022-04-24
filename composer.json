@@ -1,0 +1,22 @@
+{
+    "name": "agence-dnd-bundle/csv-converter",
+    "description": "csv converter for agence dnd",
+    "type": "symfony-bundle",
+    "require": {
+        "php": ">=7.2",
+        "symfony/framework-bundle": "^4.4",
+        "phplucidframe/console-table": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "CsvBundle\\": "src/"
+        }
+    },  
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laamarti Manelle",
+            "email": "manellelaamarti@gmail.com"
+        }
+    ]
+}
