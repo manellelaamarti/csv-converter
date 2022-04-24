@@ -3,26 +3,23 @@ namespace CsvBundle;
 
 use LucidFrame\Console\ConsoleTable;
 
-/**
- * CsvBundle
- */
 class CsvBundle
 {
     private $table;
 
     function __construct() {
-        $this->table = new ConsoleTable();
+        $this->table = new ConsoleTable(); // j'utilise une librairie afin d'obtenir un tableau plus visuel
     }
 
     public function formatHeaders($headersRow) {
-        $headers = explode(";", $headersRow);
+        $headers = explode(";", $headersRow); // ; va me servir à délimiter chaque string afin d'obtenir un tableau avec chaque colonne depuis une string
 
         foreach($headers as $key => &$header) {
             if($header == "currency") {
-                array_splice($headers, $key, 1);
+                array_splice($headers, $key, 1); // retire la row currency
             } else {
                 if($header == "is_enabled")
-                    $header = "Status";
+                    $header = "Status"; // renomme is_enabled par "Status"
 
                 // formattage du header
                 $header = ucfirst($header); // Première lettre en majuscule
@@ -33,11 +30,12 @@ class CsvBundle
         $this->table->setHeaders($headers);
     }
 
-    public function parseRow($row) {
+    public function parseRow($row) { 
         $columns = explode(";", $row);
         
         foreach($columns as $index => &$column) {
-            if($column == "$" || $column == "€") {
+            if($column == "$" || $column == "€") { 
+                // contanénation de la colonne contenant le prix + le symbole de la colonne d'après + retrait de la colonne contenant le symbole
                 $columns[$index - 1] = $columns[$index - 1] . $columns[$index];
                 array_splice($columns, $index, 1);
                 continue;
